@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -11,12 +13,23 @@ const routes: Routes = [
   },
   {
     path: 'contacts',
-    component: ContactListComponent
+    component: ContactListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'new',
-    component: AddContactComponent
+    component: AddContactComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'contacts'
   }
+
 ];
 
 @NgModule({
