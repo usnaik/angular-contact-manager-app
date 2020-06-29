@@ -20,4 +20,17 @@ export class ContactListComponent implements OnInit {
 
   }
 
+  onContactDelete(contact: Contact) {
+    this.api.delete(`contacts/${contact._id}`)
+      .subscribe(() => {
+        this.getContacts();
+      });
+  }
+
+  getContacts() {
+    this.api.get("contacts")
+      .subscribe(contacts =>
+        this.contacts = contacts);
+  }
+
 }

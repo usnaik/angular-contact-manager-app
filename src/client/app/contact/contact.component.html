@@ -8,10 +8,24 @@
       {{contact.address}}
     </div>
   </div>
-  <div class="extra content">
-    <span>
+
+  <!-- <div class="extra content"> -->
+  <Span>
+    <div>
       <i class="call icon"></i>
       {{contact.phone}}
-    </span>
+    </div>
+  </Span>
+
+  <div class="ui container">
+    <div class=" ui clearing floating segment">
+      <button class="small ui left floated icon primary basic button">
+        Edit
+        <i class="edit icon"></i>
+      </button>
+      <button class="small ui right floated icon negative basic button" (click)="onDelete()">
+        Delete
+        <i class="delete icon"></i>
+      </button>
+    </div>
   </div>
-</div>

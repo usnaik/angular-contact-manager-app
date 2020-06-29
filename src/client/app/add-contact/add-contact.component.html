@@ -9,39 +9,65 @@
       <p>Name: {{newContact.name}}</p>
     </div>
   </div>
-  <form class="ui big form" #contactForm="ngForm" (submit)="onSubmit(contactForm)" [class.loading]="loading">
+
+  <form class="ui big form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" [class.loading]="loading">
     <div class="fields">
       <div class="eight wide field">
-        <label>First Name</label>
-        <input type="text" placeholder="First Name" name="firstName" ngModel>
+        <label for="firstName">First Name</label>
+        <input type="text" placeholder="First Name" name="firstName" id="firstName" formControlName="firstName">
+        <div *ngIf="form.get('firstName').hasError('pattern')" class="error">
+          First Name has invalid characters
+        </div>
       </div>
       <div class="eight wide field">
-        <label>Last Name</label>
-        <input type="text" placeholder="Last Name" name="lastName" ngModel>
+        <label for="lastName">Last Name</label>
+        <input type="text" placeholder="Last Name" name="lastName" id="lastName" formControlName="lastName">
+        <div *ngIf="form.get('lastName').hasError('pattern')" class="error">
+          Last Name has invalid characters
+        </div>
       </div>
     </div>
     <div class="field">
-      <label>Address</label>
-      <input type="text" placeholder="Address" name="address" ngModel>
+      <label for="address">Address</label>
+      <input type="text" placeholder="Address" name="address" id="address" formControlName="address">
+      <div *ngIf="form.get('address').hasError('pattern')" class="error">
+        Address has invalid characters
+      </div>
     </div>
     <div class="equal width fields">
       <div class="field">
-        <label>Phone</label>
-        <input type="text" maxlength="5" placeholder="(###)" name="areaCode" ngModel>
+        <label for="areaCode">Phone</label>
+        <input type="text" maxlength="5" placeholder="(###)" name="areaCode" id="areaCode" formControlName="areaCode">
+        <div *ngIf="form.get('areaCode').hasError('pattern')" class="error">
+          Phone 'area code' has invalid characters
+        </div>
       </div>
       <div class="field">
-        <label>&nbsp;</label>
-        <input type="text" maxlength="3" placeholder="###" name="prefix" ngModel>
+        <label for="prefix">&nbsp;</label>
+        <input type="text" maxlength="3" placeholder="###" name="prefix" id="prefix" formControlName="prefix">
+        <div *ngIf="form.get('prefix').hasError('pattern')" class="error">
+          Phone 'prefix' has invalid characters
+        </div>
       </div>
       <div class="field">
-        <label>&nbsp;</label>
-        <input type="text" maxlength="4" placeholder="####" name="lineNumber" ngModel>
+        <label for="lineNumber">&nbsp;</label>
+        <input type="text" maxlength="4" placeholder="####" name="lineNumber" id="lineNumber"
+          formControlName="lineNumber">
+        <div *ngIf="form.get('lineNumber').hasError('pattern')" class="error">
+          Phone 'number' has invalid characters
+        </div>
       </div>
     </div>
     <div class="field">
-      <label>Photo URL</label>
-      <input type="text" placeholder="http://cdn.com/profile.jpg" name="photo" ngModel>
+      <label for="photoUrl">Photo URL</label>
+      <input type="url" placeholder="http://cdn.com/profile.jpg" name="photoUrl" id="photoUrl"
+        formControlName="photoUrl">
+      <div *ngIf="form.get('photoUrl').hasError('pattern')" class="error">
+        Image link has invalid format. (Sample link 'http://cdn.com/profile.jpg')
+      </div>
     </div>
-    <button type="submit" class="ui submit large grey button right floated">Submit</button>
+    <button type="submit" class="ui submit large grey button right floated" [disabled]="!form.valid">Submit</button>
+    <button type="cancel" class="ui cancel large grey button right floated" (click)="cancel()">Cancel</button>
   </form>
+
 </div>

@@ -1,5 +1,5 @@
 <div class="ui container">
   <div class="ui grid">
-    <app-contact *ngFor="let contact of contacts" [contact]="contact"></app-contact>
+    <app-contact *ngFor="let contact of contacts" [contact]="contact" (delete)="onContactDelete($event)"></app-contact>
   </div>
 </div>
